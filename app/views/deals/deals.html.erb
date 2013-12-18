@@ -1,0 +1,17 @@
+<h1>已获取：<%= @deals.size %>条结果</h1>
+<table>
+  <tr>
+    <td>Price(￥)</td>
+    <td>Name</td>
+    <td>Address</td>
+    <td>Phone</td>
+  </tr>
+  <% @deals.each do |deal| %>
+  <tr>
+    <td><%= deal.price %></td>
+    <td><%= deal.name %></td>
+    <td><%= deal.address %></td>
+    <td><%= deal.phone %></td>
+  </tr>
+  <% end %>
+</table>
