@@ -6,13 +6,26 @@ class Crawler
     Anemone.crawl(link) do |anemone|
       anemone.on_every_page do |page|
         segment = page.doc
-        if segment && segment.at('dd > .average') && segment.at('dd > .detail > .shopname > .BL') && segment.at('dd > .detail > .address')
-          deal = {
-            price: segment.at('dd > .average').text, 
-            name: segment.at('dd > .detail > .shopname').text,           
-            address: segment.at('dd > .detail > .address').text 
-          }
-          Deal.new(deal).save
+        if segment
+          price = segment.at('dd > .average')
+          name = segment.at('dd > .detail > .shopname > .BL')
+          addressphone = segment.at('dd > .detail > .address')
+          if price && name && addressphone
+            price = price.text.strip
+            name = name.text
+            addressphone = addressphone.text.strip.split("\n") unless addressphone.text.empty? 
+            address = addressphone[0]
+            phone = addressphone[1] ? addressphone[1].strip : nil
+            if price != "-" && name && address && phone
+              deal = {
+                price: price, 
+                name: name,           
+                address: address,
+                phone: phone[2,phone.length]
+              }
+              Deal.new(deal).save unless Deal.find_by(address: address)
+            end
+          end
         end
       end
     end
