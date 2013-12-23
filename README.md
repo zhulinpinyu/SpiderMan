@@ -1,15 +1,13 @@
-== SpiderMan
+###SpiderMan
 
 Net Spider
 
-Step 1:
+####Step:
 
-bundle
+    bundle
+    rake db:migrate
+    rails s
+    rake resque:work QUEUE="*" or rake resque:work QUEUE="crawler_queue"
 
-rake db:migrate
-
-rails s
-
-rake resque:work QUEUE="*" or rake resque:work QUEUE="crawler_queue"
-
-refresh [localhost:3000/deals](localhost:3000/deals) see data.
+Visit [http://localhost:3000](http://localhost:3000/) trigger crawler.    
+Refresh [http://localhost:3000/deals](http://localhost:3000/deals) see data.
