@@ -1,3 +1,6 @@
+
+[![Code Climate](https://codeclimate.com/github/zhulinpinyu/SpiderMan.png)](https://codeclimate.com/github/zhulinpinyu/SpiderMan)
+
 ###SpiderMan
 
 Net Spider
